@@ -1,0 +1,24 @@
+# build and review tooling
+*.py
+__pycache__/
+.mimosa/
+
+# rendered QA screenshots
+../bajrangi-assets/
+
+# editor and OS litter
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# uploaded source art - originals live in Downloads, not in the repo
+*.campaign.png
+*.asset.png
+
+# local env
+.env
+.env.local
+
+# firebase caches
+.firebase/

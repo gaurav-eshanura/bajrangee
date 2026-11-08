@@ -1021,40 +1021,79 @@ ul { list-style: none; padding: 0; }
 
 .footer__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) repeat(3, minmax(0, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(0, 1.45fr) repeat(3, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3.5vw, 3rem);
   padding-bottom: clamp(2rem, 3vw, 3rem);
 }
 
-.footer__brand { display: grid; gap: 1.6rem; align-content: start; }
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-content: start;
+}
 
-.footer__brand > .brand img { height: var(--logo-h-lg); }
+.footer__brand > .brand img {
+  height: var(--logo-h-lg);
+  width: auto;
+  object-fit: contain;
+}
 .footer__brand > .brand .brand__tag { font-size: 1rem; }
 
 .parent-brand {
-  display: grid;
-  gap: 0.5rem;
-  justify-items: start;
-  padding-left: 1.5rem;
-  border-left: 1px solid var(--line-2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  border-left: none;
+  padding-left: 0;
 }
 
 .parent-brand__kicker {
-  font-size: 0.8rem;
-  color: var(--ink-2);
-}
-
-.parent-brand img { width: min(190px, 100%); }
-
-.parent-brand small {
-  font-size: 0.7rem;
-  letter-spacing: 0.13em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
 
+.parent-brand__link {
+  display: inline-block;
+  margin: 0.15rem 0;
+  transition: opacity 0.2s ease;
+}
+.parent-brand__link:hover {
+  opacity: 0.8;
+}
+
+.footer__esh {
+  width: 125px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.parent-brand small {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--ink-2);
+}
+
 .footer__iso {
-  width: min(190px, 100%);
+  width: 135px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.35rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 0.92;
+  display: block;
 }
 
 .footer .footer__h {
@@ -1888,20 +1927,338 @@ tbody tr:hover { background: var(--cream); }
 
 .product-shot img { max-height: 48px; width: auto; object-fit: contain; }
 
-/* the Eshanura parent mark sits below the Bajrangee lockup, so it is capped
-   well under the brand's own size */
-.footer__esh { width: min(150px, 100%); }
-
-/* the certification seal reads as a badge, not a stray image */
-.footer__iso {
-  justify-self: start;
-  width: min(200px, 100%);
-  padding: .55rem .7rem;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-}
+/* footer brand marks consolidated above */
 
 /* the step number is the card's own, so the ol markers go */
 .steps { list-style: none; }
 .steps li::marker { content: none; }
+
+/* ==========================================================================
+   Elevated B2B Components (Tickers, Proof Band, Comparison, Estimator, Testimonials)
+   ========================================================================== */
+
+/* Dual Tickers */
+.ticker-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--night, #0c0c0c);
+}
+.ticker-row {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+}
+.ticker-row--red {
+  background: var(--red);
+  color: #ffffff;
+}
+.ticker-row--gold {
+  background: var(--gold);
+  color: #1a1a1a;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.ticker-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker-slide 32s linear infinite;
+}
+.ticker-inner--rev {
+  animation: ticker-slide-rev 26s linear infinite;
+}
+.ticker-inner span,
+.ticker-inner--rev span {
+  padding: 0 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+@keyframes ticker-slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes ticker-slide-rev {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Proof Band (100 माने पूरे 100) */
+.proof-band {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.proof-band__head {
+  max-width: 58ch;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.proof-card {
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.proof-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--line-2);
+}
+.proof-card__num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.proof-card__badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--peacock);
+  background: rgba(44, 122, 104, 0.12);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--r-pill);
+  margin-bottom: 0.75rem;
+}
+.proof-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+}
+.proof-card p {
+  font-size: 0.94rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+/* Comparison Table */
+.compare-table-wrap {
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-sm);
+  margin-top: 1.5rem;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.compare-table th,
+.compare-table td {
+  padding: clamp(0.75rem, 1.5vw, 1.15rem) clamp(0.9rem, 1.8vw, 1.4rem);
+  border-bottom: 1px solid var(--line);
+}
+.compare-table thead th {
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: var(--cream-2);
+}
+.compare-col--market {
+  color: #8b1e1e;
+  background: rgba(200, 24, 26, 0.05) !important;
+}
+.compare-col--bjr {
+  color: var(--red-deep);
+  background: rgba(44, 122, 104, 0.08) !important;
+}
+.compare-bad {
+  color: #7a1515;
+  background: rgba(200, 24, 26, 0.02);
+}
+.compare-good {
+  color: #125732;
+  font-weight: 600;
+  background: rgba(37, 211, 102, 0.04);
+}
+
+/* B2B Estimator */
+.estimator {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  box-shadow: var(--shadow);
+}
+.estimator__head {
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.2rem);
+  max-width: 60ch;
+}
+.estimator__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+@media (min-width: 860px) {
+  .estimator__grid {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+.estimator__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.estimator__controls label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+.estimator__controls select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1.5px solid var(--line-2);
+  border-radius: var(--r-sm);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.estimator__controls select:focus {
+  border-color: var(--red);
+}
+.estimator__result {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(1.2rem, 2vw, 1.8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+.estimator__res-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.estimator__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.estimator__list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed var(--line-2);
+  font-size: 0.92rem;
+}
+.estimator__list li strong {
+  color: var(--ink);
+}
+.estimator__list li span {
+  color: var(--red-deep);
+  font-weight: 600;
+  text-align: right;
+}
+.estimator__wa {
+  margin-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Sibling Brand Cross-Sell Band */
+.sibling-band {
+  background: #1b382b;
+  color: #f4fbf7;
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  margin-top: 2rem;
+}
+.sibling-band__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+@media (min-width: 768px) {
+  .sibling-band__inner {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.sibling-band__kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #72d99d;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+.sibling-band h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 0.35rem;
+  color: #ffffff;
+}
+.sibling-band p {
+  font-size: 0.92rem;
+  color: rgba(244, 251, 247, 0.8);
+  max-width: 52ch;
+  line-height: 1.5;
+}
+.sibling-band .btn--ghost {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  white-space: nowrap;
+}
+.sibling-band .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+}
+
+/* Product Card Quote CTA */
+.cat-card__quote {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--red-text);
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgba(200, 24, 26, 0.2);
+  border-radius: var(--r-sm);
+  background: var(--red-soft);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.cat-card__quote:hover {
+  background: var(--red);
+  color: #ffffff;
+  border-color: var(--red);
+}
+.cat-card__quote svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s ease;
+}
+.cat-card__quote:hover svg {
+  transform: translateX(3px);
+}
